@@ -1,6 +1,8 @@
 package org.roy.reststuff.resources;
 
 import com.codahale.metrics.annotation.Timed;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.ws.rs.GET;
@@ -17,7 +19,8 @@ public class HelloWorldResource {
   private final String defaultName;
   private final AtomicLong counter;
 
-  public HelloWorldResource(String template, String defaultName) {
+  @Inject
+  public HelloWorldResource(@Named("template") String template, @Named("defaultName") String defaultName) {
     this.template = template;
     this.defaultName = defaultName;
     this.counter = new AtomicLong();

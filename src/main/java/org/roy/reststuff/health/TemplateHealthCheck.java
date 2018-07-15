@@ -1,12 +1,16 @@
 package org.roy.reststuff.health;
 
-import com.codahale.metrics.health.HealthCheck;
-import com.codahale.metrics.health.HealthCheck.Result;
+import com.hubspot.dropwizard.guice.InjectableHealthCheck;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
-public class TemplateHealthCheck extends HealthCheck {
+@Singleton
+public class TemplateHealthCheck extends InjectableHealthCheck {
   private final String template;
 
-  public TemplateHealthCheck(String template) {
+  @Inject
+  public TemplateHealthCheck(@Named("template") String template) {
     this.template = template;
   }
 
@@ -17,6 +21,11 @@ public class TemplateHealthCheck extends HealthCheck {
       return Result.unhealthy("template doesn't include a name");
     }
     return Result.healthy();
+  }
+
+  @Override
+  public String getName() {
+    return "template";
   }
 
 }

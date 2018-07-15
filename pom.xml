@@ -18,6 +18,11 @@
       <artifactId>dropwizard-core</artifactId>
       <version>${dropwizard.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.hubspot.dropwizard</groupId>
+      <artifactId>dropwizard-guice</artifactId>
+      <version>1.0.0.3</version>
+    </dependency>
   </dependencies>
 
   <build>
