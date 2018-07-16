@@ -1,2 +1,4 @@
 template: Hello, %s!
 defaultName: Stranger
+mdbHost: localhost
+mdbPort: 27017
