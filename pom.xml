@@ -19,9 +19,26 @@
       <version>${dropwizard.version}</version>
     </dependency>
     <dependency>
+      <groupId>io.dropwizard</groupId>
+      <artifactId>dropwizard-testing</artifactId>
+      <version>${dropwizard.version}</version>
+    </dependency>
+    <dependency>
       <groupId>com.hubspot.dropwizard</groupId>
       <artifactId>dropwizard-guice</artifactId>
       <version>1.0.0.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <scope>test</scope>
+      <version>3.10.0</version>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard</groupId>
+      <artifactId>dropwizard-client</artifactId>
+      <scope>test</scope>
+      <version>${dropwizard.version}</version>
     </dependency>
   </dependencies>
 

@@ -11,16 +11,21 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import org.roy.reststuff.api.Saying;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Path("/hello-world")
 @Produces(MediaType.APPLICATION_JSON)
 public class HelloWorldResource {
+  final Logger logger = LoggerFactory.getLogger(HelloWorldResource.class);
+
   private final String template;
   private final String defaultName;
   private final AtomicLong counter;
 
   @Inject
   public HelloWorldResource(@Named("template") String template, @Named("defaultName") String defaultName) {
+    logger.info("Template: " + template + ", defaultName: " + defaultName);
     this.template = template;
     this.defaultName = defaultName;
     this.counter = new AtomicLong();

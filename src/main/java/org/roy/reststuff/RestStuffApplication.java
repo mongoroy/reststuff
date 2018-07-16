@@ -4,8 +4,6 @@ import com.hubspot.dropwizard.guice.GuiceBundle;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import org.roy.reststuff.health.TemplateHealthCheck;
-import org.roy.reststuff.resources.HelloWorldResource;
 
 public class RestStuffApplication extends Application<RestStuffConfiguration> {
   private GuiceBundle<RestStuffConfiguration> guiceBundle;
@@ -16,7 +14,7 @@ public class RestStuffApplication extends Application<RestStuffConfiguration> {
 
   @Override
   public String getName() {
-    return "hello-world";
+    return "rest-stuff";
   }
 
   @Override

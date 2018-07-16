@@ -60,6 +60,38 @@
       </plugin>
     </plugins>
   </build>
+  <dependencies>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.10.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard</groupId>
+      <artifactId>dropwizard-client</artifactId>
+      <version>1.3.5</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>jersey-rx-client</artifactId>
+          <groupId>org.glassfish.jersey.ext.rx</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>httpclient</artifactId>
+          <groupId>org.apache.httpcomponents</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>metrics-httpclient</artifactId>
+          <groupId>io.dropwizard.metrics</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jersey-apache-connector</artifactId>
+          <groupId>org.glassfish.jersey.connectors</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+  </dependencies>
   <properties>
     <dropwizard.version>1.3.5</dropwizard.version>
   </properties>
