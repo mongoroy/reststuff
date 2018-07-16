@@ -1,6 +1,7 @@
 package org.roy.reststuff;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.meltmedia.dropwizard.mongo.MongoConfiguration;
 import io.dropwizard.Configuration;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
@@ -14,21 +15,21 @@ public class RestStuffConfiguration extends Configuration {
   private String template;
 
   @NotEmpty
+  @JsonProperty
   private String defaultName;
+
+  @JsonProperty
+  protected MongoConfiguration mongo;
 
   public String getTemplate() {
     return template;
   }
 
-  @JsonProperty
   public String getDefaultName() {
     return defaultName;
   }
 
-  @JsonProperty
-  public void setDefaultName(String name) {
-    logger.info("Default name: " + name);
-    this.defaultName = name;
+  public MongoConfiguration getMongo() {
+    return mongo;
   }
-
 }

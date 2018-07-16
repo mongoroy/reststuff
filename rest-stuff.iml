@@ -111,6 +111,11 @@
     <orderEntry type="library" name="Maven: org.glassfish.hk2:hk2-utils:2.4.0-b34" level="project" />
     <orderEntry type="library" name="Maven: javax.ws.rs:javax.ws.rs-api:2.0.1" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:19.0" level="project" />
+    <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-sync:3.8.0" level="project" />
+    <orderEntry type="library" name="Maven: org.mongodb:bson:3.8.0" level="project" />
+    <orderEntry type="library" name="Maven: org.mongodb:mongodb-driver-core:3.8.0" level="project" />
+    <orderEntry type="library" name="Maven: com.meltmedia.dropwizard:dropwizard-mongo:0.5.0" level="project" />
+    <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:3.4.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.assertj:assertj-core:3.10.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.dropwizard:dropwizard-client:1.3.5" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jersey.core:jersey-client:2.25.1" level="project" />
