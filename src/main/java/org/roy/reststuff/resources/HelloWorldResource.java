@@ -2,7 +2,8 @@ package org.roy.reststuff.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
+import javax.inject.Named;
+//import com.google.inject.name.Named;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.ws.rs.GET;
@@ -24,7 +25,9 @@ public class HelloWorldResource {
   private final AtomicLong counter;
 
   @Inject
-  public HelloWorldResource(@Named("template") String template, @Named("defaultName") String defaultName) {
+  public HelloWorldResource(
+      @Named("template") String template,
+      @Named("defaultName") String defaultName) {
     logger.info("Template: " + template + ", defaultName: " + defaultName);
     this.template = template;
     this.defaultName = defaultName;

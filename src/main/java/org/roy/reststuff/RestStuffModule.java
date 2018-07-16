@@ -18,13 +18,15 @@ public class RestStuffModule extends AbstractModule {
 
   @Override
   protected void configure() {
+    /*
     Map<String, String> map = new HashMap<>();
     map.put("defaultName", configuration.getDefaultName());
     map.put("template", configuration.getTemplate());
     Names.bindProperties(binder(), map);
+    */
   }
 
-/*  @Provides
+  @Provides
   @Named("defaultName")
   public String provideDefaultName(RestStuffConfiguration configuration) {
     logger.info("Getting defaultName: " + configuration.getDefaultName());
@@ -37,5 +39,5 @@ public class RestStuffModule extends AbstractModule {
     logger.info("Getting template: " + configuration.getTemplate());
     return configuration.getTemplate();
   }
-*/
+
 }
