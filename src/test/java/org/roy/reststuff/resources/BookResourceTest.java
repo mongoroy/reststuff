@@ -21,9 +21,6 @@ import org.junit.Test;
 import org.roy.reststuff.TestApplication;
 
 public class BookResourceTest {
-  static {
-    JerseyGuiceUtils.reset();
-  }
 
   @ClassRule
   public static final DropwizardAppRule<Configuration> RULE =
