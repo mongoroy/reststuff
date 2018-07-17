@@ -2,10 +2,17 @@ package org.roy.reststuff.interceptors;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.mongodb.Block;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.model.changestream.ChangeStreamDocument;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import javax.inject.Inject;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.roy.reststuff.annotations.CacheWithChangeStream;
 import org.roy.reststuff.cache.CacheIdentifierKey;
@@ -18,8 +25,21 @@ public class CacheWithChangeStreamInterceptor implements MethodInterceptor {
 
   private static Map<CacheIdentifierKey, Cache<DocumentIdentifierKey, Object>> cacheMap = new HashMap<>();
 
+  @Inject
+  private MongoClient mongoClient;
+
+  private static ExecutorService threadExecutor = null;
+
   @Override
   public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+    if (threadExecutor == null) {
+      threadExecutor = Executors.newSingleThreadExecutor();
+      threadExecutor.submit(() -> {
+        mongoClient.watch().forEach((Block<ChangeStreamDocument<Document>>) b -> {
+          System.out.println(b);
+        });
+      });
+    }
     logger.info("CacheMap size: " + cacheMap.size());
 
     CacheWithChangeStream annotation = getCacheWithChangeStreamAnnotation(methodInvocation);
