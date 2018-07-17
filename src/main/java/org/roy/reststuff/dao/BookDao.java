@@ -5,6 +5,7 @@ import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.Block;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -25,17 +26,23 @@ public class BookDao {
     this.collection = mongoClient.getDatabase(Book.DB).getCollection(Book.COLLECTION, Book.class);
   }
 
-  public Book find(ObjectId id) {
-    final List<Book> books = new ArrayList<>();
-    collection.find(eq("_id", id)).forEach(new Block<Book>() {
-      @Override
-      public void apply(final Book b) {
-        logger.info("Found: " + b);
-        books.add(b);
-      }
+  public List<Book> findAll() {
+    final List<Book> list = new ArrayList<>();
+    collection.find().forEach((Block<Book>) b -> {
+      logger.info("Book: " + b);
+      list.add(b);
     });
 
-    return (books.size() > 0) ? books.get(0) : null;
+    return list;
+  }
+
+  public Book find(ObjectId id) {
+    try (MongoCursor<Book> cursor = collection.find(eq("_id", id)).iterator()) {
+      if (cursor.hasNext()) {
+        return cursor.next();
+      }
+    }
+    return null;
   }
 
 

@@ -1,8 +1,8 @@
 package org.roy.reststuff.resources;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.google.common.io.Resources;
 import com.squarespace.jersey2.guice.JerseyGuiceUtils;
 import io.dropwizard.Configuration;
 import io.dropwizard.client.HttpClientBuilder;
@@ -11,16 +11,19 @@ import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import io.dropwizard.util.Duration;
-import java.io.File;
 import javax.ws.rs.client.Client;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.roy.reststuff.TestApplication;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BookResourceTest {
+  final Logger logger = LoggerFactory.getLogger(BookResourceTest.class);
 
   @ClassRule
   public static final DropwizardAppRule<Configuration> RULE =
@@ -48,16 +51,34 @@ public class BookResourceTest {
 
   @Test
   public void testBookFind() {
+
+    // when
+    final String messageBooks = client.target(
+        String.format("http://localhost:%d/books", RULE.getLocalPort()))
+        .request()
+        .get(String.class);
+
+    logger.info("Books: " + messageBooks);
+
+    final JSONArray jsonBooks = getJSONArray(messageBooks);
+    assertTrue(jsonBooks.length() > 0);
+
+    final JSONObject book = jsonBooks.getJSONObject(0);
+
     // when
     final String message = client.target(
-        String.format("http://localhost:%d/book/5b4d11fe82a34fef43e8df4b", RULE.getLocalPort()))
+        String.format("http://localhost:%d/books/" + book.get("id"), RULE.getLocalPort()))
         .request()
         .get(String.class);
 
     final JSONObject json = getJSONObject(message);
 
     // then
-    assertThat(json.getString("title")).isEqualTo("the big cheese");
+    assertThat(json.getString("title")).isEqualTo(book.getString("title"));
+  }
+
+  static JSONArray getJSONArray(String message) {
+    return new JSONArray(message);
   }
 
   static JSONObject getJSONObject(String message) {

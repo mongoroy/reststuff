@@ -38,7 +38,10 @@ public class TestModule extends AbstractModule {
               fromProviders(
                   PojoCodecProvider.builder()
                       .automatic(true)
-                      .conventions(Arrays.asList(Conventions.SET_PRIVATE_FIELDS_CONVENTION))
+                      .conventions(Arrays.asList(
+                          Conventions.ANNOTATION_CONVENTION,
+                          Conventions.CLASS_AND_PROPERTY_CONVENTION,
+                          Conventions.SET_PRIVATE_FIELDS_CONVENTION))
                       .build()));
       MongoClientSettings settings = MongoClientSettings.builder()
           .applyConnectionString(new ConnectionString("mongodb://localhost:27017"))
