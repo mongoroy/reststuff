@@ -56,7 +56,7 @@ public class RestStuffModule extends AbstractModule {
     if (mongoClient == null) {
       CodecRegistry pojoCodecRegistry =
           fromRegistries(
-              com.mongodb.MongoClientSettings.getDefaultCodecRegistry(),
+              MongoClientSettings.getDefaultCodecRegistry(),
               fromProviders(
                   PojoCodecProvider.builder()
                       .automatic(true)

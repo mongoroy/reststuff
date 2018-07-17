@@ -5,6 +5,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import com.google.common.io.Resources;
 import com.squarespace.jersey2.guice.JerseyGuiceUtils;
 import io.dropwizard.Configuration;
+import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit.DropwizardAppRule;
 import io.dropwizard.client.JerseyClientBuilder;
 import java.io.File;
@@ -19,7 +20,7 @@ public class HelloWorldResourceTest {
 
   @ClassRule
   public static final DropwizardAppRule<Configuration> RULE =
-      new DropwizardAppRule<>(TestApplication.class, resourceFilePath("test-config.yml"));
+      new DropwizardAppRule<>(TestApplication.class, ResourceHelpers.resourceFilePath("test-config.yml"));
 
   protected static Client client;
 
@@ -31,14 +32,6 @@ public class HelloWorldResourceTest {
   @AfterClass
   public static void tearDown() {
     JerseyGuiceUtils.reset();
-  }
-
-  public static String resourceFilePath(String resourceClassPathLocation) {
-    try {
-      return new File(Resources.getResource(resourceClassPathLocation).toURI()).getAbsolutePath();
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
   }
 
   @Test

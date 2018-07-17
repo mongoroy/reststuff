@@ -5,8 +5,12 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import com.google.common.io.Resources;
 import com.squarespace.jersey2.guice.JerseyGuiceUtils;
 import io.dropwizard.Configuration;
+import io.dropwizard.client.HttpClientBuilder;
+import io.dropwizard.client.HttpClientConfiguration;
 import io.dropwizard.client.JerseyClientBuilder;
+import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.testing.junit.DropwizardAppRule;
+import io.dropwizard.util.Duration;
 import java.io.File;
 import javax.ws.rs.client.Client;
 import org.json.JSONObject;
@@ -17,16 +21,27 @@ import org.junit.Test;
 import org.roy.reststuff.TestApplication;
 
 public class BookResourceTest {
+  static {
+    JerseyGuiceUtils.reset();
+  }
 
   @ClassRule
   public static final DropwizardAppRule<Configuration> RULE =
-      new DropwizardAppRule<>(TestApplication.class, resourceFilePath("test-config.yml"));
+      new DropwizardAppRule<>(TestApplication.class, ResourceHelpers.resourceFilePath("test-config.yml"));
 
   protected static Client client;
 
   @BeforeClass
   public static void setUp() {
-    client = new JerseyClientBuilder(RULE.getEnvironment()).build("test client");
+    HttpClientConfiguration httpClientConfiguration = new HttpClientConfiguration();
+    httpClientConfiguration.setTimeout(Duration.milliseconds(4000));
+
+    HttpClientBuilder clientBuilder = new HttpClientBuilder(RULE.getEnvironment());
+    clientBuilder.using(httpClientConfiguration);
+
+    JerseyClientBuilder builder = new JerseyClientBuilder(RULE.getEnvironment());
+    builder.setApacheHttpClientBuilder(clientBuilder);
+    client = builder.build("test client");
   }
 
   @AfterClass
@@ -34,15 +49,7 @@ public class BookResourceTest {
     JerseyGuiceUtils.reset();
   }
 
-  public static String resourceFilePath(String resourceClassPathLocation) {
-    try {
-      return new File(Resources.getResource(resourceClassPathLocation).toURI()).getAbsolutePath();
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
-  }
-
-  //@Test
+  @Test
   public void testBookFind() {
     // when
     final String message = client.target(
