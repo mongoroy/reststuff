@@ -37,7 +37,7 @@ public class BookDao {
     return list;
   }
 
-  @CacheWithChangeStream
+  @CacheWithChangeStream(database=Book.DB, collection=Book.COLLECTION)
   public Book find(ObjectId id) {
     try (MongoCursor<Book> cursor = collection.find(eq("_id", id)).iterator()) {
       if (cursor.hasNext()) {

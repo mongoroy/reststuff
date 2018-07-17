@@ -19,9 +19,9 @@ import org.bson.types.ObjectId;
 @ToString
 public class Book {
 
-  public static String DB = "test";
+  public static final String DB = "test";
 
-  public static String COLLECTION = "books";
+  public static final String COLLECTION = "books";
 
   @JsonProperty
   @JsonSerialize(using = ToStringSerializer.class)

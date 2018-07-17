@@ -12,4 +12,6 @@ import com.google.inject.BindingAnnotation;
 //@BindingAnnotation
 @Target(ElementType.METHOD)
 public @interface CacheWithChangeStream {
+  String database();
+  String collection();
 }
