@@ -1,12 +1,12 @@
 package org.roy.reststuff.health;
 
-import com.hubspot.dropwizard.guice.InjectableHealthCheck;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
+import ru.vyarus.dropwizard.guice.module.installer.feature.health.NamedHealthCheck;
 
 @Singleton
-public class TemplateHealthCheck extends InjectableHealthCheck {
+public class TemplateHealthCheck extends NamedHealthCheck {
   private final String template;
 
   @Inject

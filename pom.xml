@@ -24,9 +24,9 @@
       <version>${dropwizard.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.hubspot.dropwizard</groupId>
-      <artifactId>dropwizard-guice</artifactId>
-      <version>1.0.0.3</version>
+      <groupId>ru.vyarus</groupId>
+      <artifactId>dropwizard-guicey</artifactId>
+      <version>4.2.0</version>
     </dependency>
     <dependency>
       <groupId>org.mongodb</groupId>

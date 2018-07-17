@@ -3,7 +3,6 @@ package org.roy.reststuff.resources;
 import static junit.framework.TestCase.assertTrue;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.squarespace.jersey2.guice.JerseyGuiceUtils;
 import io.dropwizard.Configuration;
 import io.dropwizard.client.HttpClientBuilder;
 import io.dropwizard.client.HttpClientConfiguration;
@@ -46,7 +45,7 @@ public class BookResourceTest {
 
   @AfterClass
   public static void tearDown() {
-    JerseyGuiceUtils.reset();
+    //JerseyGuiceUtils.reset();
   }
 
   @Test

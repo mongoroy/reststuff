@@ -1,13 +1,11 @@
 package org.roy.reststuff;
 
-import com.hubspot.dropwizard.guice.GuiceBundle;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import ru.vyarus.dropwizard.guice.GuiceBundle;
 
 public class RestStuffApplication extends Application<RestStuffConfiguration> {
-  private GuiceBundle<RestStuffConfiguration> guiceBundle;
-
   public static void main(String[] args) throws Exception {
     new RestStuffApplication().run(args);
   }
@@ -19,12 +17,10 @@ public class RestStuffApplication extends Application<RestStuffConfiguration> {
 
   @Override
   public void initialize(Bootstrap<RestStuffConfiguration> bootstrap) {
-    guiceBundle = GuiceBundle.<RestStuffConfiguration>newBuilder()
-        .addModules(new RestStuffModule(), new CacheWithChangeStreamModule())
+    bootstrap.addBundle(GuiceBundle.builder()
+        .modules(new RestStuffModule(), new CacheWithChangeStreamModule())
         .enableAutoConfig(getClass().getPackage().getName())
-        .setConfigClass(RestStuffConfiguration.class)
-        .build();
-    bootstrap.addBundle(guiceBundle);
+        .build());
   }
 
   @Override
