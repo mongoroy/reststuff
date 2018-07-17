@@ -5,6 +5,7 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
+import com.google.inject.matcher.Matchers;
 import com.google.inject.name.Names;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
@@ -16,6 +17,8 @@ import java.util.Map;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.Conventions;
 import org.bson.codecs.pojo.PojoCodecProvider;
+import org.roy.reststuff.annotations.CacheWithChangeStream;
+import org.roy.reststuff.interceptors.CacheWithChangeStreamInterceptor;
 
 public class TestModule extends AbstractModule {
 

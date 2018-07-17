@@ -13,7 +13,7 @@ public class TestApplication extends Application<Configuration> {
   @Override
   public void initialize(final Bootstrap<Configuration> bootstrap) {
     final GuiceBundle<Configuration> jersey2GuiceBundle = newBuilder()
-        .addModule(new TestModule())
+        .addModules(new CacheWithChangeStreamModule(), new RestStuffModule())
         .enableAutoConfig(this.getClass().getPackage().getName())
         .build();
     bootstrap.addBundle(jersey2GuiceBundle);

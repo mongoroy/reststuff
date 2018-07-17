@@ -11,6 +11,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.bson.types.ObjectId;
+import org.roy.reststuff.annotations.CacheWithChangeStream;
 import org.roy.reststuff.model.Book;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,10 +37,13 @@ public class BookDao {
     return list;
   }
 
+  @CacheWithChangeStream
   public Book find(ObjectId id) {
     try (MongoCursor<Book> cursor = collection.find(eq("_id", id)).iterator()) {
       if (cursor.hasNext()) {
-        return cursor.next();
+        Book b = cursor.next();
+        logger.info("Book: " + b);
+        return b;
       }
     }
     return null;

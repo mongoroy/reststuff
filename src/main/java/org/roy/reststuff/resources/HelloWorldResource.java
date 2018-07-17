@@ -6,6 +6,7 @@ import javax.inject.Named;
 //import com.google.inject.name.Named;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
+import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -15,6 +16,7 @@ import org.roy.reststuff.api.Saying;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Singleton
 @Path("/hello-world")
 @Produces(MediaType.APPLICATION_JSON)
 public class HelloWorldResource {

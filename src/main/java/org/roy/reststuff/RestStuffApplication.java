@@ -20,7 +20,7 @@ public class RestStuffApplication extends Application<RestStuffConfiguration> {
   @Override
   public void initialize(Bootstrap<RestStuffConfiguration> bootstrap) {
     guiceBundle = GuiceBundle.<RestStuffConfiguration>newBuilder()
-        .addModule(new RestStuffModule())
+        .addModules(new RestStuffModule(), new CacheWithChangeStreamModule())
         .enableAutoConfig(getClass().getPackage().getName())
         .setConfigClass(RestStuffConfiguration.class)
         .build();
