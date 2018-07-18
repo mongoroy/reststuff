@@ -41,7 +41,7 @@ public class PersonDao {
     try (MongoCursor<Person> cursor = collection.find(eq("_id", id)).iterator()) {
       if (cursor.hasNext()) {
         Person b = cursor.next();
-        logger.info("BoPersonok: " + b);
+        logger.info("Person: " + b);
         return b;
       }
     }
