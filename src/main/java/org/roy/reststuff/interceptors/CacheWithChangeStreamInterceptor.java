@@ -2,18 +2,12 @@ package org.roy.reststuff.interceptors;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.mongodb.Block;
 import com.mongodb.client.MongoClient;
-import com.mongodb.client.model.changestream.ChangeStreamDocument;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.roy.reststuff.annotations.CacheWithChangeStream;
 import org.roy.reststuff.cache.CacheIdentifierKey;
@@ -35,14 +29,11 @@ public class CacheWithChangeStreamInterceptor implements MethodInterceptor {
 
   @Override
   public Object invoke(MethodInvocation methodInvocation) throws Throwable {
-    logger.info("CacheMap size: {}", cacheMap.size());
-
     Class pojoClass = methodInvocation.getMethod().getReturnType();
     CacheWithChangeStream annotation = getCacheWithChangeStreamAnnotation(methodInvocation);
     String db = getDatabase(annotation);
     String col = getCollection(annotation);
     CacheIdentifierKey cacheKey = new CacheIdentifierKey(db + "." + col);
-    logger.info("Cache Identifier key: {}", cacheKey);
     Cache<DocumentIdentifierKey, Object> cache = cacheMap.computeIfAbsent(cacheKey, k -> {
       logger.info("Creating new cache: {}", cacheKey);
       Cache<DocumentIdentifierKey, Object> c = CacheBuilder.newBuilder()
@@ -51,12 +42,11 @@ public class CacheWithChangeStreamInterceptor implements MethodInterceptor {
       cacheWatcherManager.addCacheWatcher(new CacheWatcher(mongoClient, db, col, pojoClass, c));
       return c;
     });
-    logger.info("Cache size: {}", cache.size());
     DocumentIdentifierKey key = getDocumentIdentifierKey(methodInvocation);
-    logger.info("Document key: {}", key);
+
     Object object = cache.getIfPresent(key);
     if (object != null) {
-      logger.info("Found object from cache: {}", object);
+      logger.info("Found {} from cache: {}", pojoClass, object);
       return object;
     }
 

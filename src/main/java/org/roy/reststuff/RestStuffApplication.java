@@ -25,16 +25,6 @@ public class RestStuffApplication extends Application<RestStuffConfiguration> {
 
   @Override
   public void run(RestStuffConfiguration conf, Environment env) {
-    /* guice bundle auto config should find resources
-    final HelloWorldResource resource = new HelloWorldResource(conf.getTemplate(), conf.getDefaultName());
-    env.jersey().register(resource);
-    */
-
-    /* guice bundle auto config should find InjectableHealthCheck classes
-    final TemplateHealthCheck healthCheck = new TemplateHealthCheck(conf.getTemplate());
-    env.healthChecks().register("template", healthCheck);
-    env.jersey().register(resource);
-    */
   }
 
 }

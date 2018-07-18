@@ -12,7 +12,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.bson.types.ObjectId;
 import org.roy.reststuff.annotations.CacheWithChangeStream;
-import org.roy.reststuff.model.Book;
 import org.roy.reststuff.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +30,6 @@ public class PersonDao {
   public List<Person> findAll() {
     final List<Person> list = new ArrayList<>();
     collection.find().forEach((Block<Person>) b -> {
-      logger.info("Person: " + b);
       list.add(b);
     });
 

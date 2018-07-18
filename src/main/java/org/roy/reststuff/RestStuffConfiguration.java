@@ -2,8 +2,6 @@ package org.roy.reststuff;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
-import io.dropwizard.validation.MaxSize;
-import io.dropwizard.validation.MinSize;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

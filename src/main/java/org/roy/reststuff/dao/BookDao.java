@@ -30,7 +30,6 @@ public class BookDao {
   public List<Book> findAll() {
     final List<Book> list = new ArrayList<>();
     collection.find().forEach((Block<Book>) b -> {
-      logger.info("Book: " + b);
       list.add(b);
     });
 

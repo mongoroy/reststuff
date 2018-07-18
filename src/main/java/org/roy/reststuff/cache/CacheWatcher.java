@@ -14,10 +14,7 @@ import com.mongodb.client.model.changestream.FullDocument;
 import com.mongodb.client.model.changestream.OperationType;
 import lombok.AllArgsConstructor;
 import org.bson.Document;
-import org.bson.codecs.Codec;
-import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.types.ObjectId;
-import org.roy.reststuff.model.Book;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
