@@ -18,6 +18,7 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.Conventions;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.roy.reststuff.annotations.CacheWithChangeStream;
+import org.roy.reststuff.cache.CacheWatcherManager;
 import org.roy.reststuff.interceptors.CacheWithChangeStreamInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
