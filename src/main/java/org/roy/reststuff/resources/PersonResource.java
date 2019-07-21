@@ -3,7 +3,9 @@ package org.roy.reststuff.resources;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -40,5 +42,25 @@ public class PersonResource {
   public Person getPerson(@PathParam("id") String id) {
     logger.info("Looking up " + id);
     return personDao.find(new ObjectId(id));
+  }
+
+  @POST
+  @Produces(MediaType.APPLICATION_JSON)
+  public Person createPerson(@FormParam("name") String name) {
+    logger.info("Creating " + name);
+    ObjectId id = new ObjectId();
+    Person person = Person.builder().id(id).name(name).build();
+    personDao.insert(person);
+    return person;
+  }
+
+  @POST
+  @Path("/{id}/isLocked")
+  @Produces(MediaType.APPLICATION_JSON)
+  public Person updatePersonLocked(@PathParam("id") String idStr, @FormParam("isLocked") Boolean isLocked) {
+    logger.info("Updating " + idStr + " to be isLocked=" + isLocked);
+    ObjectId id = new ObjectId(idStr);
+    personDao.updateAccountLocked(id, isLocked);
+    return personDao.find(id);
   }
 }

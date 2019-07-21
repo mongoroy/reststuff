@@ -1,6 +1,7 @@
 package org.roy.reststuff.dao;
 
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.set;
 
 import com.mongodb.Block;
 import com.mongodb.client.MongoClient;
@@ -34,6 +35,16 @@ public class PersonDao {
     });
 
     return list;
+  }
+
+  public void insert(Person person) {
+    collection.insertOne(person);
+  }
+
+  public void updateAccountLocked(ObjectId id, boolean isLocked) {
+    collection.updateOne(
+        eq("_id", id),
+        set("accountLocked", isLocked));
   }
 
   @CacheWithChangeStream(database=Person.DB, collection=Person.COLLECTION)
