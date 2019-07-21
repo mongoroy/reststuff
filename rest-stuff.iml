@@ -127,5 +127,8 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.glassfish.jersey.connectors:jersey-apache-connector:2.25.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.json:json:20180130" level="project" />
     <orderEntry type="library" name="Maven: javax.activation:activation:1.1.1" level="project" />
+    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-core:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.3.0" level="project" />
   </component>
 </module>

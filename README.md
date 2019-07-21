@@ -10,6 +10,20 @@ db.books.insert( { title: "MongoDB for dummies", available: 2 } );
 db.persons.insert( { name: "John Smith", accountLocked: false } );
 ```
 
-to compile run `mvn package`
-to run run `java -jar target/rest-stuff-1.0-SNAPSHOT.jar server rest-stuff.yml`
+to compile: `mvn package`
 
+to run: `java -jar target/rest-stuff-1.0-SNAPSHOT.jar server rest-stuff.yml`
+
+After running you can interact with the REST API via curl:
+
+GET a list of Persons:
+`curl http://localhost:8080/persons`
+
+To GET a specific Person:
+`curl http://localhost:8080/persons/[ID]`
+
+Add a person:
+`curl http://localhost:8080/persons/ -d "name=[name]"`
+
+Update if a person is locked:
+`curl http://localhost:8080/persons/[ID]/isLocked -d "isLocked=[true/false]"`
