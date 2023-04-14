@@ -55,7 +55,7 @@
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
       <scope>test</scope>
-      <version>20180130</version>
+      <version>20230227</version>
     </dependency>
     <dependency>
       <groupId>javax.activation</groupId>
